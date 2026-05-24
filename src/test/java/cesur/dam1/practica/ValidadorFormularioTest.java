@@ -158,6 +158,33 @@ class ValidadorFormularioTest {
         assertFalse(validador.validarNombre("María José"),
                 "BUG: nombres españoles con tildes deberían ser válidos");
     }
+
+    // === VALIDAR DNI ===
+
+    @Test
+    @DisplayName("DNI con letra correcta debe devolver true")
+    void testDNIValido() {
+        assertTrue(validador.validarDNI("12345678Z"));
+    }
+ 
+    @Test
+    @DisplayName("DNI null debe devolver false")
+    void testDNINull() {
+        assertFalse(validador.validarDNI(null));
+    }
+ 
+    @Test
+    @DisplayName("DNI con letra incorrecta debe devolver false")
+    void testDNILetraIncorrecta() {
+        assertFalse(validador.validarDNI("12345678A"));
+    }
+ 
+    @Test
+    @DisplayName("DNI con letra en minúscula debe devolver true (el código la convierte)")
+    void testDNILetraMinuscula() {
+        // Caja blanca: Character.toUpperCase() convierte antes de comparar
+        assertTrue(validador.validarDNI("12345678z"));
+    }
  
 
 }
