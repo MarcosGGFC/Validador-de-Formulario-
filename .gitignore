@@ -1,0 +1,13 @@
+# Ignorar la carpeta de compilación de Maven
+target/
+
+# Ignorar archivos de configuración de VS Code
+.settings/
+.project
+.classpath
+.factorypath
+.vscode/
+
+# Ignorar archivos del sistema operativo
+.DS_Store
+Thumbs.db
