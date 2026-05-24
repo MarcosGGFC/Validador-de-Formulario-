@@ -103,6 +103,33 @@ class ValidadorFormularioTest {
     void testPasswordSinNumeros() {
         assertFalse(validador.validarPassword("AbcdefGH"));
     }
+
+    // === VALIDAR TELEFONO ===
+
+    @Test
+    @DisplayName("Teléfono válido empezando por 6 debe devolver true")
+    void testTelefonoValido() {
+        assertTrue(validador.validarTelefono("612345678"));
+    }
+ 
+    @Test
+    @DisplayName("Teléfono null debe devolver false")
+    void testTelefonoNull() {
+        assertFalse(validador.validarTelefono(null));
+    }
+ 
+    @Test
+    @DisplayName("Teléfono empezando por 8 debe devolver false")
+    void testTelefonoPrefijoInvalido() {
+        assertFalse(validador.validarTelefono("812345678"));
+    }
+ 
+    @ParameterizedTest
+    @DisplayName("Teléfonos válidos empezando por 6, 7 y 9 deben devolver true")
+    @ValueSource(strings = { "612345678", "712345678", "912345678" })
+    void testTelefonoPrefijoValido(String telefono) {
+        assertTrue(validador.validarTelefono(telefono));
+    }
  
 
 }
