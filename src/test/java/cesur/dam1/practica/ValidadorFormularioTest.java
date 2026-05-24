@@ -18,6 +18,8 @@ class ValidadorFormularioTest {
         validador = new ValidadorFormulario();
     }
 
+    // === VALIDAR EMAIL ===
+
     @Test
     @DisplayName("Email típico válido debe devolver true")
     void testEmailValido() {
@@ -75,5 +77,32 @@ class ValidadorFormularioTest {
         assertTrue(validador.validarEmail(email),
                 "El código acepta '" + email + "' porque contiene '@' — validación incompleta");
     }
+
+    // === VALIDAR PASSWORD ===
+
+    @Test
+    @DisplayName("Contraseña con 8 caracteres y un número debe devolver true")
+    void testPasswordValida() {
+        assertTrue(validador.validarPassword("Abcdefg1"));
+    }
+ 
+    @Test
+    @DisplayName("Contraseña null debe devolver false")
+    void testPasswordNull() {
+        assertFalse(validador.validarPassword(null));
+    }
+ 
+    @Test
+    @DisplayName("Contraseña con 7 caracteres debe devolver false (valor límite)")
+    void testPasswordSieteCaracteres() {
+        assertFalse(validador.validarPassword("Abcde1f"));
+    }
+ 
+    @Test
+    @DisplayName("Contraseña de 8 caracteres sin número debe devolver false")
+    void testPasswordSinNumeros() {
+        assertFalse(validador.validarPassword("AbcdefGH"));
+    }
+ 
 
 }
