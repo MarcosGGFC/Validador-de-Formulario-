@@ -130,6 +130,34 @@ class ValidadorFormularioTest {
     void testTelefonoPrefijoValido(String telefono) {
         assertTrue(validador.validarTelefono(telefono));
     }
+
+    // === VALIDAR NOMBRE ===
+
+     @Test
+    @DisplayName("Nombre válido sin tildes debe devolver true")
+    void testNombreValido() {
+        assertTrue(validador.validarNombre("Juan Garcia"));
+    }
+ 
+    @Test
+    @DisplayName("Nombre null debe devolver false")
+    void testNombreNull() {
+        assertFalse(validador.validarNombre(null));
+    }
+ 
+    @Test
+    @DisplayName("Nombre de 1 carácter debe devolver false (valor límite inferior)")
+    void testNombreDemasiadoCorto() {
+        assertFalse(validador.validarNombre("A"));
+    }
+ 
+    @Test
+    @DisplayName("Nombre con tildes debe devolver false (BUG: debería ser true)")
+    void testNombreConTildesBUG() {
+        // BUG IR-002: el regex [a-zA-Z ] no acepta caracteres acentuados ni ñ
+        assertFalse(validador.validarNombre("María José"),
+                "BUG: nombres españoles con tildes deberían ser válidos");
+    }
  
 
 }
