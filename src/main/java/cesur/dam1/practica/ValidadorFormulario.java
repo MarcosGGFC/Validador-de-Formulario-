@@ -10,7 +10,8 @@ public class ValidadorFormulario {
     // Email válido: contiene '@' y al menos un '.' después de '@'
     public boolean validarEmail(String email) {
         if (email == null) return false;
-        return email.contains("@"); // ← ¿es suficiente esta comprobación?
+        // return email.contains("@"); // ← ¿es suficiente esta comprobación?
+        return email.matches("^[\\w._%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$");
     }
 
     // Contraseña: mínimo 8 caracteres, al menos 1 número
@@ -34,7 +35,8 @@ public class ValidadorFormulario {
     public boolean validarNombre(String nombre) {
         if (nombre == null) return false;
         if (nombre.length() < 2 || nombre.length() > 50) return false;
-        return nombre.matches("[a-zA-Z ]+"); // ← ¿acepta nombres con tildes?
+        //return nombre.matches("[a-zA-Z ]+"); // ← ¿acepta nombres con tildes?
+        return nombre.matches("[\\p{L} ]+");
     }
 
     // DNI español: 8 dígitos + 1 letra
