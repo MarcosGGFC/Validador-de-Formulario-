@@ -74,7 +74,7 @@ class ValidadorFormularioTest {
             "a@b@c"          
     })
     void testEmailsQueElCodigoAceptaPorTenerArroba(String email) {
-        assertTrue(validador.validarEmail(email),
+        assertFalse(validador.validarEmail(email), //Cambiado después del mvn test
                 "El código acepta '" + email + "' porque contiene '@' — validación incompleta");
     }
 
@@ -153,9 +153,8 @@ class ValidadorFormularioTest {
  
     @Test
     @DisplayName("Nombre con tildes debe devolver false (BUG: debería ser true)")
-    void testNombreConTildesBUG() {
-        // BUG IR-002: el regex [a-zA-Z ] no acepta caracteres acentuados ni ñ
-        assertFalse(validador.validarNombre("María José"),
+    void testNombreConTildes() {
+        assertTrue(validador.validarNombre("María José"), //Cambiado después del mvn test
                 "BUG: nombres españoles con tildes deberían ser válidos");
     }
 
